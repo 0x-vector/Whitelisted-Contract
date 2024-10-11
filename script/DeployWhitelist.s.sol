@@ -5,11 +5,13 @@ import {Script, console} from "forge-std/Script.sol";
 import {Whitelist} from "../src/Whitelist.sol";
 
 contract DeployWhitelist is Script {
+    Whitelist public whitelist;
+
     // function setUp() public {}
 
     function run() public {
         vm.startBroadcast();
-        Whitelist whitelist = new Whitelist();
+        whitelist = new Whitelist();
         vm.stopBroadcast();
     }
 }

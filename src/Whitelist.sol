@@ -7,7 +7,7 @@ contract Whitelist {
     string private tokenTicker = "UGT";
     uint256 private totalSupply = 1_000_000_000; // total supply is 1B
     uint256 private allocatedTokens = 100 * 10 ** 18;
-    address[] private whitelistedAddresses;
+    address[] public whitelistedAddresses;
 
     event Transfers(address indexed from, address indexed to, uint256 amount);
     address public i_owner;
