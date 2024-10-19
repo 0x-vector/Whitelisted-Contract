@@ -7,9 +7,11 @@ import {DeployWhitelist} from "../script/DeployWhitelist.s.sol";
 
 contract WhitelistTest is Test {
     Whitelist public whitelist;
+    address public PLAYER = makeAddr("player");
 
     function setUp() public {
-        whitelist = new Whitelist();
+        DeployWhitelist deployWhitelist = new DeployWhitelist();
+        whitelist = deployWhitelist.run();
     }
 
     function testOwnerIsCorrect() public {
@@ -17,8 +19,9 @@ contract WhitelistTest is Test {
     }
 
     function testArrayIsBeingUpdated() public {
-        assertEq(whitelist.whitelistedAddresses(), []);
+        vm.prank(PLAYER);
         whitelist.registerForEligibility();
-        assertEq(whitelist.whitelistedAddresses(), msg.sender);
+        address registeredWallets = whitelist.getWallets(0);
+        assertEq(registeredWallets == PLAYER);
     }
 }

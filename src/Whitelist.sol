@@ -47,4 +47,9 @@ contract Whitelist {
         require(msg.sender == i_owner, "This is not the contract owner.");
         _;
     }
+
+    // ============ STORAGE FUNCTIONS ===========
+    function getWallets(uint256 index) public returns (address) {
+        return whitelistedAddresses[index];
+    }
 }
